@@ -46,5 +46,32 @@ namespace BookApi.Controllers
             return CreatedAtAction(nameof(GetBook), new { id = book.Id }, book);
         }
 
+        // PUT: api/books/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBook(int id, Book updatedBook)
+        {
+            if (id != updatedBook.Id)
+            {
+                return BadRequest("ID in URL and body must match.");
+            }
+
+            var existingBook = await _context.Books.FindAsync(id);
+
+            if (existingBook == null)
+            {
+                return NotFound();
+            }
+
+            // Update the properties
+            existingBook.Title = updatedBook.Title;
+            existingBook.Author = updatedBook.Author;
+            existingBook.PublicationDate = updatedBook.PublicationDate;
+            existingBook.Price = updatedBook.Price;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent(); // 204 success, no body
+        }
     }
+
 }
