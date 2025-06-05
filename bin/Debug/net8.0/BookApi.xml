@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BookApi</name>
+    </assembly>
+    <members>
+        <member name="T:BookApi.Controllers.BooksController">
+            <summary>
+            API controller for managing book resources
+            </summary>
+        </member>
+        <member name="M:BookApi.Controllers.BooksController.GetBooks(System.Int32,System.Int32)">
+            <summary>
+            Gets a paginated list of books
+            </summary>
+            <param name="page">Page number (starts at 1)</param>
+            <param name="pageSize">Number of items per page</param>
+            <returns>A collection of books for the requested page</returns>
+            <response code="200">Returns the list of books</response>
+            <response code="400">If page or pageSize parameters are invalid</response>
+            <response code="404">If the requested page exceeds total pages</response>
+        </member>
+        <member name="M:BookApi.Controllers.BooksController.GetBook(System.Int32)">
+            <summary>
+            Gets a specific book by ID
+            </summary>
+            <param name="id">The ID of the book to retrieve</param>
+            <returns>The requested book</returns>
+            <response code="200">Returns the requested book</response>
+            <response code="404">If the book with the specified ID is not found</response>
+        </member>
+        <member name="M:BookApi.Controllers.BooksController.CreateBook(BookApi.Models.Book)">
+            <summary>
+            Creates a new book
+            </summary>
+            <param name="book">The book data to create</param>
+            <returns>The created book with its assigned ID</returns>
+            <response code="201">Returns the newly created book</response>
+            <response code="400">If the book data is invalid</response>
+        </member>
+        <member name="M:BookApi.Controllers.BooksController.UpdateBook(System.Int32,BookApi.Models.Book)">
+            <summary>
+            Updates an existing book
+            </summary>
+            <param name="id">The ID of the book to update</param>
+            <param name="updatedBook">The updated book data</param>
+            <returns>No content if successful</returns>
+            <response code="204">If the book was successfully updated</response>
+            <response code="400">If the ID in the URL doesn't match the ID in the body</response>
+            <response code="404">If the book with the specified ID is not found</response>
+        </member>
+        <member name="M:BookApi.Controllers.BooksController.DeleteBook(System.Int32)">
+            <summary>
+            Deletes a specific book
+            </summary>
+            <param name="id">The ID of the book to delete</param>
+            <returns>No content if successful</returns>
+            <response code="204">If the book was successfully deleted</response>
+            <response code="404">If the book with the specified ID is not found</response>
+        </member>
+        <member name="M:BookApi.Controllers.BooksController.SearchBooks(System.String)">
+            <summary>
+            Searches for books by title or author
+            </summary>
+            <param name="query">The search query string</param>
+            <returns>A collection of books matching the search criteria</returns>
+            <response code="200">Returns the list of matching books</response>
+            <response code="400">If the query string is empty</response>
+        </member>
+        <member name="T:BookApi.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:BookApi.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookApi.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookApi.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:BookApi.Models.Book">
+            <summary>
+            Represents a book in the library management system
+            </summary>
+        </member>
+        <member name="P:BookApi.Models.Book.Id">
+            <summary>
+            Unique identifier for the book (auto-generated)
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:BookApi.Models.Book.Title">
+            <summary>
+            The title of the book
+            </summary>
+            <example>The Great Gatsby</example>
+        </member>
+        <member name="P:BookApi.Models.Book.Author">
+            <summary>
+            The author of the book
+            </summary>
+            <example>F. Scott Fitzgerald</example>
+        </member>
+        <member name="P:BookApi.Models.Book.PublicationDate">
+            <summary>
+            The publication date of the book
+            </summary>
+            <example>1925-04-10</example>
+        </member>
+        <member name="P:BookApi.Models.Book.Price">
+            <summary>
+            The price of the book in USD
+            </summary>
+            <example>15.99</example>
+        </member>
+    </members>
+</doc>
