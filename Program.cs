@@ -5,11 +5,6 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure Kestrel to listen on port 8080 for Docker
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(8080); // Only HTTP
-});
 
 // Register the AppDbContext with SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -41,8 +36,7 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty; // Swagger will be at root: /
 });
 
-// for HTTPS redirection, uncomment the next line, doesnt work in Docker without certs
-// app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 // Routing and Controllers
 app.UseAuthorization();
