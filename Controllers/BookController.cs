@@ -72,6 +72,23 @@ namespace BookApi.Controllers
 
             return NoContent(); // 204 success, no body
         }
+        // DELETE: api/books/5
+[HttpDelete("{id}")]
+public async Task<IActionResult> DeleteBook(int id)
+{
+    var book = await _context.Books.FindAsync(id);
+
+    if (book == null)
+    {
+        return NotFound();
     }
 
+    _context.Books.Remove(book);
+    await _context.SaveChangesAsync();
+
+    return NoContent(); // 204 success
+}
+
+    }
+    
 }
