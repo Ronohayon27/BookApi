@@ -6,6 +6,8 @@ A RESTful Web API for managing a collection of books, built with ASP.NET Core 8.
 
 BookApi is a comprehensive backend service that provides CRUD operations for book resources. It includes features such as pagination, searching, and proper HTTP status code responses following RESTful principles.
 
+This project was created as a home assignment to demonstrate RESTful API development skills using .NET Core.
+
 ## Features
 
 - **Complete CRUD Operations**:
@@ -25,16 +27,69 @@ BookApi is a comprehensive backend service that provides CRUD operations for boo
   - Configurable page size
   - Page navigation
 
-## API Endpoints
+## API Documentation
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/books` | Get a paginated list of books |
-| GET | `/api/books/{id}` | Get a specific book by ID |
-| POST | `/api/books` | Create a new book |
-| PUT | `/api/books/{id}` | Update an existing book |
-| DELETE | `/api/books/{id}` | Delete a book |
-| GET | `/api/books/search?query={query}` | Search for books by title or author |
+### Endpoints
+
+| Method | Endpoint | Description | Status Codes |
+|--------|----------|-------------|-------------|
+| GET | `/api/books` | Get a paginated list of books | 200, 400, 404 |
+| GET | `/api/books/{id}` | Get a specific book by ID | 200, 404 |
+| POST | `/api/books` | Create a new book | 201, 400 |
+| PUT | `/api/books/{id}` | Update an existing book | 204, 400, 404 |
+| DELETE | `/api/books/{id}` | Delete a book | 204, 404 |
+| GET | `/api/books/search?query={query}` | Search for books by title or author | 200, 400 |
+
+### Request and Response Examples
+
+#### Get Books (GET /api/books)
+
+Query Parameters:
+- `page` (optional): Page number (default: 1)
+- `pageSize` (optional): Number of items per page (default: 10)
+
+Response (200 OK):
+```json
+[
+  {
+    "id": 1,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "publicationDate": "1925-04-10T00:00:00",
+    "price": 12.99
+  },
+  {
+    "id": 2,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "publicationDate": "1960-07-11T00:00:00",
+    "price": 14.99
+  }
+]
+```
+
+#### Create Book (POST /api/books)
+
+Request Body:
+```json
+{
+  "title": "1984",
+  "author": "George Orwell",
+  "publicationDate": "1949-06-08T00:00:00",
+  "price": 11.99
+}
+```
+
+Response (201 Created):
+```json
+{
+  "id": 3,
+  "title": "1984",
+  "author": "George Orwell",
+  "publicationDate": "1949-06-08T00:00:00",
+  "price": 11.99
+}
+```
 
 ## Technical Stack
 
@@ -44,7 +99,7 @@ BookApi is a comprehensive backend service that provides CRUD operations for boo
 - **Documentation**: Swagger/OpenAPI
 - **Containerization**: Docker
 
-## Getting Started
+## Setup Instructions
 
 ### Prerequisites
 
@@ -74,6 +129,22 @@ BookApi is a comprehensive backend service that provides CRUD operations for boo
    ```
 
 5. Access the API at `https://localhost:5001/api/books` or `http://localhost:5000/api/books`
+
+### Docker Setup
+
+Alternatively, you can run the application using Docker:
+
+1. Build the Docker image:
+   ```
+   docker build -t bookapi .
+   ```
+
+2. Run the container:
+   ```
+   docker run -d -p 8080:80 --name bookapi-container bookapi
+   ```
+
+3. Access the API at `http://localhost:8080/api/books`
 
 ### Running Tests
 
@@ -141,13 +212,37 @@ docker run -d -p 8080:80 --name bookapi-container bookapi
 
 This will start the API on port 8080 of your host machine.
 
-### Docker Compose (Optional)
 
-If you have a `docker-compose.yml` file, you can use:
+## Assumptions Made
 
-```
-docker-compose up -d
-```
+1. **Database**: The application assumes the use of Entity Framework Core with an in-memory database for development and testing. In a production environment, a persistent database like SQL Server would be used.
+
+2. **Authentication**: The current implementation does not include authentication or authorization.
+
+3. **Validation**: Basic validation is implemented for the Book model, assuming that all books must have a title, author, and valid publication date.
+
+4. **Pagination**: The API assumes that pagination is a requirement for listing books, with sensible defaults (page 1, 10 items per page).
+
+5. **Search**: The search functionality assumes case-insensitive matching for both title and author fields.
+
+## Future Improvements
+
+1. **Authentication and Authorization**: Implement JWT-based authentication and role-based authorization.
+
+2. **Searching**: Add the ability to search with pagination, if the numebr is too large.
+
+3. **Caching**: Implement response caching to improve performance for frequently accessed resources.
+
+4. **Logging and Monitoring**: Enhance logging and add monitoring capabilities for better observability.
+
+
+## Development Decisions
+
+1. **Repository Pattern**: Not implemented in favor of direct DbContext usage for simplicity in this small assignment. For larger applications, a repository pattern would be beneficial.
+
+2. **In-Memory Database for Testing**: Used to ensure tests are isolated and don't depend on external systems.
+
+3. **RESTful Design**: Followed REST principles for resource naming, HTTP methods, and status codes to create a predictable and standard API.
 
 ## License
 
