@@ -131,7 +131,7 @@ Response (201 Created):
    dotnet run
    ```
 
-5. Access the API at `https://localhost:5001/api/books` or `http://localhost:5000/api/books`
+5. Access the API at the URL shown in the console output (default is `http://localhost:5220/api/books` or `https://localhost:7188/api/books`)
 
 ### Docker Setup
 
@@ -147,7 +147,7 @@ Alternatively, you can run the application using Docker:
    docker run -d -p 8080:80 --name bookapi-container bookapi
    ```
 
-3. Access the API at `http://localhost:8080/api/books`
+3. Access the API at `http://localhost:8080/api/books` (when using Docker)
 
 ### Running Tests
 
