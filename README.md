@@ -19,9 +19,12 @@ This project was created as a home assignment to demonstrate RESTful API develop
 - **Search Functionality**:
   - Search books by title or author
   
-- **Robust Error Handling**:
+- **Comprehensive Error Handling**:
+  - Global exception handling middleware
   - Appropriate HTTP status codes
+  - Detailed error responses
   - Validation of input data
+  - Error logging
   
 - **Pagination**:
   - Configurable page size
@@ -225,6 +228,9 @@ This will start the API on port 8080 of your host machine.
 
 5. **Search**: The search functionality assumes case-insensitive matching for both title and author fields.
 
+6. **Date Format and Type**: The publicationDate property is implemented using the DateTime type, as required by the assignment. Even though only the date component is semantically relevant for books, I left it as it is.
+
+
 ## Future Improvements
 
 1. **Authentication and Authorization**: Implement JWT-based authentication and role-based authorization.
@@ -243,6 +249,10 @@ This will start the API on port 8080 of your host machine.
 2. **In-Memory Database for Testing**: Used to ensure tests are isolated and don't depend on external systems.
 
 3. **RESTful Design**: Followed REST principles for resource naming, HTTP methods, and status codes to create a predictable and standard API.
+
+4. **Global Error Handling**: Implemented a centralized error handling middleware that catches all unhandled exceptions, logs them, and returns appropriate HTTP status codes and standardized error responses. This approach ensures consistent error handling across the entire API without duplicating error handling code in each controller.
+
+5. **Working With Git**: Since this project was developed individually, all work was done on a single main branch. In a team setting, I would have implemented a branching strategy (e.g., feature, develop, and release branches) to support collaborative development and code reviews.
 
 ## License
 
