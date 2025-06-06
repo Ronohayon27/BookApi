@@ -1,4 +1,5 @@
 using BookApi.Data;
+using BookApi.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -27,6 +28,9 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+
+// Register global error handling middleware
+app.UseErrorHandling();
 
 // Always enable Swagger (so it's available in Docker)
 app.UseSwagger();
