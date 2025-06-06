@@ -97,6 +97,20 @@ namespace BookApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
         public async Task<ActionResult<Book>> CreateBook(Book book)
         {
+            // If ID is provided and it's not the default value (0)
+            if (book.Id != 0)
+            {
+                // Check if a book with this ID already exists
+                var existingBook = await _context.Books.FindAsync(book.Id);
+                if (existingBook != null)
+                {
+                    return BadRequest($"A book with ID {book.Id} already exists. Let the system assign an ID automatically.");
+                }
+            }
+            
+            // Reset ID to 0 to ensure auto-generation by the database
+            book.Id = 0;
+            
             _context.Books.Add(book);
             await _context.SaveChangesAsync();
 

@@ -181,7 +181,7 @@ dotnet test BookApi.Tests/BookApi.Tests.csproj --collect:"XPlat Code Coverage"
 
 The Book entity includes the following properties:
 
-- `Id`: Unique identifier
+- `Id`: Unique identifier (auto generated)
 - `Title`: Book title
 - `Author`: Book author
 - `PublicationDate`: Date of publication
@@ -229,6 +229,8 @@ This will start the API on port 8080 of your host machine.
 5. **Search**: The search functionality assumes case-insensitive matching for both title and author fields.
 
 6. **Date Format and Type**: The publicationDate property is implemented using the DateTime type, as required by the assignment. Even though only the date component is semantically relevant for books, I left it as it is.
+
+7. **Duplicate Entries**: The API allows duplicate values for book properties such as Title, Author, PublicationDate, and Price. However, the Id field is enforced as a unique identifier and cannot be duplicated.
 
 
 ## Future Improvements
