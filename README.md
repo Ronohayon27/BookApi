@@ -15,17 +15,14 @@ This project was created as a home assignment to demonstrate RESTful API develop
   - Retrieve books (individual or paginated list)
   - Update existing books
   - Delete books
-  
 - **Search Functionality**:
   - Search books by title or author
-  
 - **Comprehensive Error Handling**:
   - Global exception handling middleware
   - Appropriate HTTP status codes
   - Detailed error responses
   - Validation of input data
   - Error logging
-  
 - **Pagination**:
   - Configurable page size
   - Page navigation
@@ -34,24 +31,26 @@ This project was created as a home assignment to demonstrate RESTful API develop
 
 ### Endpoints
 
-| Method | Endpoint | Description | Status Codes |
-|--------|----------|-------------|-------------|
-| GET | `/api/books` | Get a paginated list of books | 200, 400, 404 |
-| GET | `/api/books/{id}` | Get a specific book by ID | 200, 404 |
-| POST | `/api/books` | Create a new book | 201, 400 |
-| PUT | `/api/books/{id}` | Update an existing book | 204, 400, 404 |
-| DELETE | `/api/books/{id}` | Delete a book | 204, 404 |
-| GET | `/api/books/search?query={query}` | Search for books by title or author | 200, 400 |
+| Method | Endpoint                          | Description                         | Status Codes  |
+| ------ | --------------------------------- | ----------------------------------- | ------------- |
+| GET    | `/api/books`                      | Get a paginated list of books       | 200, 400, 404 |
+| GET    | `/api/books/{id}`                 | Get a specific book by ID           | 200, 404      |
+| POST   | `/api/books`                      | Create a new book                   | 201, 400      |
+| PUT    | `/api/books/{id}`                 | Update an existing book             | 204, 400, 404 |
+| DELETE | `/api/books/{id}`                 | Delete a book                       | 204, 404      |
+| GET    | `/api/books/search?query={query}` | Search for books by title or author | 200, 400      |
 
 ### Request and Response Examples
 
 #### Get Books (GET /api/books)
 
 Query Parameters:
+
 - `page` (optional): Page number (default: 1)
 - `pageSize` (optional): Number of items per page (default: 10)
 
 Response (200 OK):
+
 ```json
 [
   {
@@ -74,6 +73,7 @@ Response (200 OK):
 #### Create Book (POST /api/books)
 
 Request Body:
+
 ```json
 {
   "title": "1984",
@@ -84,6 +84,7 @@ Request Body:
 ```
 
 Response (201 Created):
+
 ```json
 {
   "id": 3,
@@ -97,7 +98,8 @@ Response (201 Created):
 ## Technical Stack
 
 - **Framework**: ASP.NET Core 8.0
-- **Database**: Entity Framework Core with SQL Server
+- **Database**: Entity Framework Core with SQLite
+
 - **Testing**: xUnit with in-memory database provider
 - **Documentation**: Swagger/OpenAPI
 - **Containerization**: Docker
@@ -107,26 +109,30 @@ Response (201 Created):
 ### Prerequisites
 
 - .NET 8.0 SDK or later
-- SQL Server (or another database provider supported by EF Core)
+- SQL Server/SQLite (or another database provider supported by EF Core)
 
 ### Installation
 
 1. Clone the repository:
+
    ```
    git clone https://github.com/Ronohayon27/BookApi.git
    ```
 
 2. Navigate to the project directory:
+
    ```
    cd BookApi
    ```
 
 3. Build the project:
+
    ```
    dotnet build
    ```
 
 4. Run the application:
+
    ```
    dotnet run
    ```
@@ -199,7 +205,6 @@ docker run -d -p 8080:8080 --name bookapi-container bookapi
 
 This will start the API on port 8080 of your host machine.
 
-
 ## Assumptions Made
 
 1. **Database**: The application assumes the use of Entity Framework Core with an in-memory database for development and testing. In a production environment, a persistent database like SQL Server would be used.
@@ -216,7 +221,6 @@ This will start the API on port 8080 of your host machine.
 
 7. **Duplicate Entries**: The API allows duplicate values for book properties such as Title, Author, PublicationDate, and Price. However, the Id field is enforced as a unique identifier and cannot be duplicated.
 
-
 ## Future Improvements
 
 1. **Authentication and Authorization**: Implement JWT-based authentication and role-based authorization.
@@ -226,7 +230,6 @@ This will start the API on port 8080 of your host machine.
 3. **Caching**: Implement response caching to improve performance for frequently accessed resources.
 
 4. **Logging and Monitoring**: Enhance logging and add monitoring capabilities for better observability.
-
 
 ## Development Decisions
 
