@@ -194,7 +194,7 @@ docker build -t bookapi .
 ### Running the Container
 
 ```
-docker run -d -p 8080:80 --name bookapi-container bookapi
+docker run -d -p 8080:8080 --name bookapi-container bookapi
 ```
 
 This will start the API on port 8080 of your host machine.
